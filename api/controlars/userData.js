@@ -2,7 +2,7 @@ import User from '../models/user.model.js'
 import bcryptjs from 'bcryptjs'
 import { errorHandler } from '../utils/error.js'
 
-export const singin = async(req,res,next) => {
+export const singup = async(req,res,next) => {
     const { userName, email, password } = req.body
     if (!userName || !email || !password || userName === "" || email === "" || password === "") {
        next(errorHandler(400,"Fill up all fields"))

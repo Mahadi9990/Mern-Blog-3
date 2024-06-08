@@ -1,8 +1,8 @@
 import express from "express";
-import { singin } from "../controlars/userData.js";
+import { singup } from "../controlars/userData.js";
 
 const route = express.Router()
 
-route.post('/sing-in', singin)
+route.post('/sing-up', singup)
 
 export default route
