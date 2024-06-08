@@ -14,7 +14,18 @@ mongoose.connect(process.env.MONGO).then(() => {
 const app = express()
 app.use(express.json())
 
-app.use('/api/user',userOuth)
+app.use('/api/user', userOuth)
+
+
+app.use((err, req, res, next) => {
+    const statuscode = err.statuscode || 500;
+    const message = err.message || "Internal Server Error"
+    res.status(statuscode).json({
+        success: false,
+        statuscode,
+        message
+    })
+})
 
 app.listen(3000, () => {
     console.log('server is running on port 3000')
