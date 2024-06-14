@@ -66,7 +66,7 @@ export default function Singup() {
             <Label value='Your email'/>
             <TextInput
               type='email'
-              placeholder='example@gmail.co '
+              placeholder='example@gmail.com'
                 id='email'
                 onChange={handleClick}
             />
@@ -76,6 +76,7 @@ export default function Singup() {
             <TextInput
               type='password'
                 id='password'
+                placeholder='***********'
                 onChange={handleClick}
 
             />
