@@ -5,6 +5,7 @@ import Singup from './pages/Singup'
 import Profile from './pages/Profile'
 import About from './pages/About'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -16,7 +17,8 @@ export default function App() {
         <Route path='/sing-up' element={<Singup/>} />
         <Route path='/profile' element={<Profile/>} />
         <Route path='/about' element={<About/>} />
-    </Routes>
+      </Routes>
+      <Footer/>
     </BrowserRouter>
   )
 }

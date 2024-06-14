@@ -29,7 +29,7 @@ export default function Header() {
         </Button>
         <Link>
           <Button gradientDuoTone='purpleToBlue' outline>
-            Project
+            Sing in
           </Button>
         </Link>
         <Navbar.Toggle/>
