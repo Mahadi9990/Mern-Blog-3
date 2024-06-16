@@ -10,22 +10,22 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        singinStart: (state) => {
+        singInStart: (state) => {
             state.error = null,
             state.loading = true
         },
-        singinSuccess: (state, action) => {
+        singInSuccess: (state, action) => {
             state.currentUser = action.payload,
             state.loading = false
             state.error =null
         },
-        singinFailuar: (state, action) => {
+        singInFailuar: (state, action) => {
             state.error = action.payload,
             state.loading =false
         }
     }
 })
 
-export const { singinStart, singinSuccess, singinFailuar } = userSlice.actions
+export const { singInStart, singInSuccess, singInFailuar } = userSlice.actions
 
 export default userSlice.reducer;

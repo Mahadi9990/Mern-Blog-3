@@ -1,6 +1,7 @@
 import { Link , useNavigate } from 'react-router-dom';
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { useState } from 'react';
+import Outh from '../components/Outh';
 
 export default function Singup() {
   const [formData, setformData] = useState({});
@@ -88,6 +89,7 @@ export default function Singup() {
                 </>)
              : 'Sing up'}
             </Button>
+            <Outh/>
           </form>
           <p className='font-semibold text-sm'>Have an account <Link to={'/sing-in'}><span className='text-blue-500 hover:underline'>Sing in</span></Link></p>
           {errorMessage && (

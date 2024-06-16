@@ -2,7 +2,8 @@ import { Link , useNavigate } from 'react-router-dom';
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { useState } from 'react';
 import { useDispatch ,useSelector} from 'react-redux'
-import { singinStart, singinFailuar, singinSuccess } from '../redux/user/userSlice.js';
+import { singInStart, singInFailuar, singInSuccess } from '../redux/user/userSlice.js';
+import Outh from '../components/Outh';
 
 export default function Singin() {
   const [formData, setformData] = useState({});
@@ -18,7 +19,7 @@ export default function Singin() {
       return seterrorMessage("Please fill up add inputs")
     }
     try {
-      dispatch(singinStart())
+      dispatch(singInStart())
       const res = await fetch('/api/user/sing-in', {
         method: "POST",
         headers: {
@@ -30,13 +31,15 @@ export default function Singin() {
       const data = await res.json()
       
       if (data.success === false) {
-        dispatch(singinFailuar(data.message))
+        dispatch(singInFailuar(data.message))
       }
-      dispatch(singinSuccess(data))
-      navigate('/')
+      if (res.ok) {
+        dispatch(singInSuccess(data))
+        navigate('/')
+      }
       
     } catch (error) {
-      dispatch(singinFailuar(error.message))
+      dispatch(singInFailuar(error.message))
     }
   }
   return (
@@ -77,6 +80,7 @@ export default function Singin() {
                 </>)
              : 'Sing in'}
             </Button>
+            <Outh/>
           </form>
           <p className='font-semibold text-sm'>Dont Have an account <Link to={'/sing-up'}><span className='text-blue-500 hover:underline'>Sing up</span></Link></p>
           {errorMessage && (
