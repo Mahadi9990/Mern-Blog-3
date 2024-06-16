@@ -1,10 +1,12 @@
-import { Button, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { IoSearchSharp } from "react-icons/io5"
 import { Link ,useLocation } from 'react-router-dom'
 import { FaMoon } from "react-icons/fa6";
+import {useSelector} from 'react-redux'
 
 export default function Header() {
-  const path =useLocation().pathname
+  const path = useLocation().pathname
+  const {currentUser} =useSelector((state)=>state.user)
   return (
       <Navbar className='border-b-2'>
           <Link className='
@@ -27,11 +29,40 @@ export default function Header() {
         <Button className='w-12 h-10' pill color='gray'>
           <FaMoon/>
         </Button>
-        <Link>
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar
+                size='sm'
+                alt='user'
+                img={currentUser.avater}
+                rounded
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span>@{currentUser.email}</span><br />
+              <span className='mt-2 truncate'>{currentUser.userName}</span>
+            </Dropdown.Header>
+            <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>
+                Profile
+            </Dropdown.Item>
+            </Link>
+            <Dropdown.Divider />
+            <Dropdown.Item>
+              Sing out
+            </Dropdown.Item>
+          </Dropdown>
+        ): (
+          <Link>
           <Button gradientDuoTone='purpleToBlue' outline>
             Sing in
           </Button>
         </Link>
+        )}
         <Navbar.Toggle/>
       </div>
         <Navbar.Collapse>
