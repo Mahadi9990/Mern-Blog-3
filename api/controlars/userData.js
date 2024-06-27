@@ -75,3 +75,49 @@ export const google = async (req, res, next) => {
         next(error)
     }
 }
+
+export const updateUser = async (req, res, next) => {
+    if (req.user.id !== req.params.userId) {
+        return next(errorHandler(402,'You can updata your own account'))
+    }
+    if (req.body.password) {
+        if (req.body.password.length < 6) {
+            return next(errorHandler(402, 'Password must be 7 character'))
+        }
+        req.body.password =bcryptjs.hashSync(password,10)
+
+    }
+    if (req.body.userName) {
+        if (req.body.userName.length < 5 || req.body.userName.length > 20) {
+            return next(errorHandler(400, 'Username must between 5 and 21 character'))
+        }
+        if (req.body.userName.includes(' ')) {
+            return next(errorHandler(400, 'Space is not allowed'))
+        }
+        if (req.body.userName  !== req.body.userName.toLowerCase()) {
+            return next(errorHandler(400, 'Username must be LowerCase'))
+        }
+        if (!req.body.userName.match(/^[a-zA-Z0-9]+$/)) {
+            return next(errorHandler(400, 'Username must be text or number'))
+        }
+    }
+    try {
+        const userUpDate = await User.findByIdAndUpdate(
+            req.params.userId,
+            {
+                $set: {
+                    userName: req.body.userName,
+                    email: req.body.email,
+                    password: req.body.password,
+                    avater:req.body.avater
+                },
+            },
+            { new: true }
+        )
+        const { password:pass,...rest } =userUpDate._doc
+        res.status(200).json(rest)
+
+    } catch (error) {
+      next(error)  
+    }
+}
