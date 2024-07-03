@@ -9,5 +9,6 @@ route.post('/sing-in', singin)
 route.post('/google', google)
 route.put('/update/:userId',varifyToken, updateUser)
 
-
 export default route
+
+

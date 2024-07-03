@@ -76,6 +76,7 @@ export const google = async (req, res, next) => {
     }
 }
 
+
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.userId) {
         return next(errorHandler(402,'You can updata your own account'))
@@ -84,7 +85,7 @@ export const updateUser = async (req, res, next) => {
         if (req.body.password.length < 6) {
             return next(errorHandler(402, 'Password must be 7 character'))
         }
-        req.body.password =bcryptjs.hashSync(password,10)
+        req.body.password =bcryptjs.hashSync(req.body.password,10)
 
     }
     if (req.body.userName) {
@@ -102,7 +103,7 @@ export const updateUser = async (req, res, next) => {
         }
     }
     try {
-        const userUpDate = await User.findByIdAndUpdate(
+        const updateUser = await User.findByIdAndUpdate(
             req.params.userId,
             {
                 $set: {
@@ -114,7 +115,7 @@ export const updateUser = async (req, res, next) => {
             },
             { new: true }
         )
-        const { password:pass,...rest } =userUpDate._doc
+        const { password:pass,...rest } =updateUser._doc
         res.status(200).json(rest)
 
     } catch (error) {
