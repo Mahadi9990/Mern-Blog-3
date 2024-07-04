@@ -135,3 +135,14 @@ export const deleteUser = async (req, res, next) => {
       next(error)  
     }
 }
+export const singOutUser = async (req, res, next) => {
+   
+    try {
+        res
+            .clearCookie('access_token')
+            .status(201)
+            .json('user has been singout')
+    } catch (error) {
+      next(error)  
+    }
+}

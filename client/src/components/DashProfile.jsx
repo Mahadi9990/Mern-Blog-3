@@ -6,7 +6,16 @@ import { app } from '../firebase.js'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useDispatch } from 'react-redux';
-import { updateStart, updateSuccess, updateFailuar,deleteUserStart,deleteUserSuccess,deleteUserFailuar } from '../redux/user/userSlice.js';
+import {
+  updateStart,
+  updateSuccess,
+  updateFailuar,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailuar,
+  singoutUserSuccess,
+  singoutUserFailuar
+} from '../redux/user/userSlice.js';
 import {HiOutlineExclamationCircle} from 'react-icons/hi'
 
 export default function DashProfile() {
@@ -127,6 +136,22 @@ export default function DashProfile() {
     }
 }
   
+  const userSingout = async () => {
+    try {
+      const res = await fetch(`/api/user/singout`, {
+        method:'POST'
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        dispatch(singoutUserFailuar(data.message))
+      } else {
+        dispatch(singoutUserSuccess(data))
+      }
+    } catch (error) {
+      dispatch(singoutUserFailuar(error.message))
+    }
+}
+  
   
   return (
       <div className='mx-auto'>
@@ -189,7 +214,7 @@ export default function DashProfile() {
       </form>
       <div className="flex justify-between pt-2">
         <span onClick={()=>setshowModle(true)} className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
-        <span className='text-red-400 font-semibold cursor-pointer'>Sing Out</span>
+        <span onClick={userSingout} className='text-red-400 font-semibold cursor-pointer'>Sing Out</span>
       </div>
       {updateUserSuccess && (
         <Alert color='success' className='md:ps-[180px] ps-[70px] mt-3'>
