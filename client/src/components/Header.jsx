@@ -1,15 +1,33 @@
-import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, ButtonGroup, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { IoSearchSharp } from "react-icons/io5"
 import { Link ,useLocation } from 'react-router-dom'
 import { FaMoon ,FaSun } from "react-icons/fa6";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice';
+import { singoutUserFailuar,singoutUserSuccess } from '../redux/user/userSlice';
+
 
 export default function Header() {
   const path = useLocation().pathname
   const dispatch =useDispatch()
   const {currentUser} =useSelector((state)=>state.user)
-  const {theme} =useSelector((state)=>state.theme)
+  const { theme } = useSelector((state) => state.theme)
+   const userSingout = async () => {
+    try {
+      const res = await fetch(`/api/user/singout`, {
+        method:'POST'
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        dispatch(singoutUserFailuar(data.message))
+      } else {
+        dispatch(singoutUserSuccess(data))
+      }
+    } catch (error) {
+      dispatch(singoutUserFailuar(error.message))
+    }
+}
+  
   return (
       <Navbar className='border-b-2'>
           <Link className='
@@ -55,8 +73,8 @@ export default function Header() {
             </Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>
-              Sing out
+            <Dropdown.Item onClick={userSingout}>
+                Sing out
             </Dropdown.Item>
           </Dropdown>
         ): (

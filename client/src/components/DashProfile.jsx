@@ -30,7 +30,6 @@ export default function DashProfile() {
   const [updataError, setupdataError] = useState(null);
   const [formData, setformData] = useState({});
   const [showModle, setshowModle] = useState(false);
-  console.log(showModle)
   const filePickerRef = useRef()
   const handleChange = (e) => {
     setformData({...formData,[e.target.id]:e.target.value})
