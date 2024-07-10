@@ -35,7 +35,7 @@ export const singin = async (req, res, next) => {
         if (!validPassword) {
              return next(errorHandler(401,'Wroung password'))
         }
-        const token = jwt.sign({ id: validUser._id }, process.env.JSONWEBTOKEN)
+        const token = jwt.sign({ id: validUser._id , isAdmin:validUser.isAdmin }, process.env.JSONWEBTOKEN)
         const {password:pass,...rest}=validUser._doc
         res.cookie('access_token', token, { httpOnly: true })
             .status(200)
@@ -50,7 +50,7 @@ export const google = async (req, res, next) => {
     try {
         const userList = await User.findOne({ email })
         if (userList) {
-            const token = jwt.sign({ id: userList._id }, process.env.JSONWEBTOKEN)
+            const token = jwt.sign({ id: userList._id ,isAdmin:userList.isAdmin}, process.env.JSONWEBTOKEN)
             const {password:pass,...rest} =userList._doc
             res.cookie('access_token', token, { httpOnly: true })
             .status(200)
@@ -65,7 +65,7 @@ export const google = async (req, res, next) => {
                 avater:image
             })
             await newUser.save()
-            const token = jwt.sign({ id: newUser._id }, process.env.JSONWEBTOKEN)
+            const token = jwt.sign({ id: newUser._id,isAdmin:newUser.isAdmin }, process.env.JSONWEBTOKEN)
             const {password:pass,...rest} =newUser._doc
             res.cookie('access_token', token, { httpOnly: true })
             .status(200)

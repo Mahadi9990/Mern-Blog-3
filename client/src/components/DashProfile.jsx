@@ -6,6 +6,7 @@ import { app } from '../firebase.js'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useDispatch } from 'react-redux';
+import {Link} from 'react-router-dom'
 import {
   updateStart,
   updateSuccess,
@@ -20,7 +21,7 @@ import {HiOutlineExclamationCircle} from 'react-icons/hi'
 
 export default function DashProfile() {
   const dispatch =useDispatch()
-  const { currentUser,error } = useSelector((state) => state.user)
+  const { currentUser,error,loading } = useSelector((state) => state.user)
   const [imageFile, setimageFile] = useState(null);
   const [imgaeFileUrl, setimgaeFileUrl] = useState(null);
   const [imageFileUploadError, setimageFileUploadError] = useState(null);
@@ -207,9 +208,16 @@ export default function DashProfile() {
           placeholder='password'
           onChange={handleChange}
         />
-        <Button gradientDuoTone='purpleToBlue' outline type='submit'>
-          Update
+        <Button gradientDuoTone='purpleToBlue' outline type='submit' disabled={loading || imageUploading}>
+          {loading? 'loading..':'upload'}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={'/create-post'}>
+            <Button as='div' type='button' gradientDuoTone='purpleToPink' className='w-full'>
+            Create Post page
+          </Button>
+          </Link>
+        )}
       </form>
       <div className="flex justify-between pt-2">
         <span onClick={()=>setshowModle(true)} className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
