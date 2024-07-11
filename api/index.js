@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userOuth from './routes/user.outh.js'
+import postOuth from './routes/post.outh.js'
 import cookieParser from 'cookie-parser'
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/user', userOuth)
+app.use('/api/post', postOuth)
 
 
 app.use((err, req, res, next) => {
