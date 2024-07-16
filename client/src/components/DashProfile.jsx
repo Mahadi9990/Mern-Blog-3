@@ -219,7 +219,7 @@ export default function DashProfile() {
           </Link>
         )}
       </form>
-      <div className="flex justify-between pt-2">
+      <div className="flex justify-between pt-2 mb-5">
         <span onClick={()=>setshowModle(true)} className='text-red-600 font-semibold cursor-pointer'>Delete Account</span>
         <span onClick={userSingout} className='text-red-400 font-semibold cursor-pointer'>Sing Out</span>
       </div>
