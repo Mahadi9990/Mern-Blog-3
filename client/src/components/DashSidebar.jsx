@@ -1,10 +1,14 @@
 import { Sidebar } from 'flowbite-react'
 import { HiUser, HiArrowSmRight } from 'react-icons/hi'
+import { IoDocuments } from "react-icons/io5";
+
 import { useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { singoutUserFailuar,singoutUserSuccess } from '../redux/user/userSlice';
 import { useSelector } from 'react-redux';
+import { FaUsers } from "react-icons/fa";
+
 export default function DashSidebar() {
   const dispatch = useDispatch()
   const {currentUser} =useSelector((state)=>state.user)
@@ -44,8 +48,15 @@ export default function DashSidebar() {
                   </Link>
                   {currentUser.isAdmin && (
                  <Link to={'/dashboard?tab=posts'} >
-                    <Sidebar.Item as='div' active={tab === 'posts'} icon={HiUser}  labelColor='dark'> 
+                    <Sidebar.Item as='div' active={tab === 'posts'} icon={IoDocuments}  labelColor='dark'> 
                       Posts
+                  </Sidebar.Item>
+                  </Link>
+                  )}
+                  {currentUser.isAdmin && (
+                 <Link to={'/dashboard?tab=users'} >
+                    <Sidebar.Item as='div' active={tab === 'users'} icon={FaUsers}  labelColor='dark'> 
+                      Users
                   </Sidebar.Item>
                   </Link>
                   )}

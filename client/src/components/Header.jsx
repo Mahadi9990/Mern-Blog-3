@@ -1,6 +1,6 @@
-import { Avatar, Button, ButtonGroup, Dropdown, Navbar, TextInput } from 'flowbite-react'
+import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
 import { IoSearchSharp } from "react-icons/io5"
-import { Link ,useLocation,useNavigate } from 'react-router-dom'
+import { Link ,useLocation } from 'react-router-dom'
 import { FaMoon ,FaSun } from "react-icons/fa6";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice';
@@ -8,7 +8,6 @@ import { singoutUserFailuar,singoutUserSuccess } from '../redux/user/userSlice';
 
 
 export default function Header() {
-  const navigate =useNavigate()
   const path = useLocation().pathname
   const dispatch =useDispatch()
   const {currentUser} =useSelector((state)=>state.user)
@@ -23,7 +22,6 @@ export default function Header() {
         dispatch(singoutUserFailuar(data.message))
       } else {
         dispatch(singoutUserSuccess(data))
-        navigate('/sing-in')
       }
     } catch (error) {
       dispatch(singoutUserFailuar(error.message))
@@ -82,7 +80,7 @@ export default function Header() {
             </Dropdown.Item>
           </Dropdown>
         ): (
-          <Link>
+          <Link to={'/sing-in'}>
           <Button gradientDuoTone='purpleToBlue' outline>
             Sing in
           </Button>
