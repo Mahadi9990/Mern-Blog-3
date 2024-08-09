@@ -128,7 +128,7 @@ export const deleteUser = async (req, res, next) => {
 
     if (req.user.isAdmin && req.user.id  === req.params.userId) {
         
-        return next(errorHandler(404,' Admin account is not for delete'))
+        return next(errorHandler(404,'Log Admin account is not for delete'))
     }
     if (!req.user.isAdmin && req.user.id  !== req.params.userId) {
         return next(errorHandler(404,'You can delete your own account'))
