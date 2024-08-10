@@ -1,5 +1,5 @@
 import express from "express";
-import { singup,singin,google ,updateUser,deleteUser,singOutUser,getUser} from "../controlars/userData.js";
+import { singup,singin,google ,updateUser,deleteUser,singOutUser,getUser,getCommentUser} from "../controlars/userData.js";
 import { varifyToken } from "../utils/verifyToken.js";
 
 const route = express.Router()
@@ -11,6 +11,7 @@ route.put('/update/:userId',varifyToken, updateUser)
 route.delete('/delete/:userId', varifyToken, deleteUser)
 route.post('/singout', singOutUser)
 route.get('/getUser',varifyToken, getUser)
+route.get('/:userId', getCommentUser)
 
 
 export default route
