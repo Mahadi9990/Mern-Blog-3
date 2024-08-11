@@ -73,6 +73,11 @@ export default function CommentSection({postId}) {
             console.log(error.message)
         }
     }
+    const handleEdit =async(comment,editComment)=>{
+        setallComments(allComments.map((c)=>
+        c._id === comment._id ? {...c,comment:editComment}:c
+        ))
+    }
   return (
     <div>
         {currentUser ?(
@@ -124,7 +129,7 @@ export default function CommentSection({postId}) {
                     {
                         allComments.map(comment=>(
                             <div className="my-3">
-                                <Comment onLike={handleLike}  key={comment._id} comment={comment}/>
+                                <Comment onEdit={handleEdit} onLike={handleLike}  key={comment._id} comment={comment}/>
                             </div>
                         ))   
                     }
