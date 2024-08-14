@@ -87,3 +87,43 @@ export const deleteComments =async(req,res,next)=>{
         next(error)
     }
 }
+
+
+export const getAllComments = async (req, res, next) => {
+    if (!req.user.isAdmin) {
+        return next(errorHandler(401,'Only admin can see all Comments'))
+    }
+    try {
+        const startIndex = req.query.startIndex || 0;
+        const limit = req.query.limit || 9;
+        const sortDirection =req.query.sort === 'asc' ? 1 : -1
+        const comments = await Comment.find()  
+            .sort({ createdAt: sortDirection })
+            .limit(limit)
+            .skip(startIndex)
+        
+        
+
+        const totalComments = await Comment.countDocuments()
+        
+        const now = new Date()
+        
+        const lestMonth = new Date(
+            now.getFullYear() /
+            now.getMonth() - 1 /
+            now.getTime()
+        )
+
+        const oneMonthBefore = await Comment.countDocuments({
+            createdAt : { $gte :lestMonth}
+        })
+
+        res.status(200).json({
+            comments,
+            oneMonthBefore,
+            totalComments
+        })
+    } catch (error) {
+        next(error)
+    }
+ }

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { Button, Spinner } from 'flowbite-react'
 import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
+import Card from "../components/Card";
 
 
 export default function PostPage() {
@@ -10,6 +11,21 @@ export default function PostPage() {
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState(null);
     const [post, setpost] = useState([]);
+    const [recentPost, setrecentPost] = useState([]);
+    useEffect(() => {
+        try {
+            const recent3Post =async()=>{
+                const res =await fetch(`/api/post/getposts?limit=3`)
+                const data =await res.json()
+                if(res.ok){
+                    setrecentPost(data.posts)
+                }
+            }
+            recent3Post() 
+        } catch (error) {
+          console.log(error.message)  
+        }
+    }, []);
     useEffect(() => {
      const fetchApi =async()=>{
         try {
@@ -57,6 +73,14 @@ export default function PostPage() {
             <CallToAction/>
         </div>
             <CommentSection postId={post._id}/>
+        <div className="">
+            <h1 className="text-center text-xl font-serif font-semibold">Recent Post</h1>
+            <div className="flex flex-row gap-4 justify-center my-3">
+                {recentPost && recentPost.map((post)=>
+                        <Card key={post._id} post={post}/>
+                )}
+            </div>
+        </div>
     </main>
   )
 }

@@ -14,7 +14,7 @@ export default function DashPosts() {
   useEffect(() => {
     const fetchApi = async() => {
       try {
-        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`)
+        const res = await fetch(`/api/post/getposts`)
         const data = await res.json()
         if (res.ok) {
           setuserPosts(data.posts)

@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { singoutUserFailuar,singoutUserSuccess } from '../redux/user/userSlice';
 import { useSelector } from 'react-redux';
+import { MdInsertComment } from "react-icons/md";
+
 import { FaUsers } from "react-icons/fa";
 
 export default function DashSidebar() {
@@ -57,6 +59,13 @@ export default function DashSidebar() {
                  <Link to={'/dashboard?tab=users'} >
                     <Sidebar.Item as='div' active={tab === 'users'} icon={FaUsers}  labelColor='dark'> 
                       Users
+                  </Sidebar.Item>
+                  </Link>
+                  )}
+                  {currentUser.isAdmin && (
+                 <Link to={'/dashboard?tab=comment'} >
+                    <Sidebar.Item as='div' active={tab === 'comment'} icon={MdInsertComment}  labelColor='dark'> 
+                      comment
                   </Sidebar.Item>
                   </Link>
                   )}
