@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { singoutUserFailuar,singoutUserSuccess } from '../redux/user/userSlice';
 import { useSelector } from 'react-redux';
 import { MdInsertComment } from "react-icons/md";
-
+import { TbLayoutDashboard } from "react-icons/tb";
 import { FaUsers } from "react-icons/fa";
 
 export default function DashSidebar() {
@@ -43,6 +43,13 @@ export default function DashSidebar() {
       <Sidebar className='w-full md:w-56' >
           <Sidebar.Items>
               <Sidebar.ItemGroup className='md:min-h-screen flex flex-col gap-1'>
+                  {currentUser.isAdmin && (
+                 <Link to={'/dashboard?tab=dash'} >
+                    <Sidebar.Item as='div' active={tab === 'dash'} icon={TbLayoutDashboard}  labelColor='dark'> 
+                      Dashboard
+                    </Sidebar.Item>
+                  </Link>
+                  )}
                   <Link to={'/dashboard?tab=profile'} >
                   <Sidebar.Item as='div' active={tab === 'profile'} icon={HiUser} label={currentUser.isAdmin ? 'Admin' : 'user'}>
                     Profile
