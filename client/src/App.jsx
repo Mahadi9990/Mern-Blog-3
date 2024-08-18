@@ -13,6 +13,7 @@ import IsAdminPrivateRoute from './components/IsAdminPrivateRoute'
 import ScrollToTop from './components/ScrollToTop'
 import UpdatePost from './pages/UpdatePost'
 import PostPage from './pages/PostPage'
+import Search from './pages/Search'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/search' element={<Search/>} />
         <Route path='/sing-in' element={<Singin/>} />
         <Route path='/sing-up' element={<Singup/>} />
         <Route path='/profile' element={<Profile/>} />

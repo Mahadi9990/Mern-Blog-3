@@ -17,8 +17,8 @@ export default function Home() {
   }, []);
   return (
     <div className='mx-auto flex flex-col justify-center items-center p-3'>
-      <div className="w-[800px] ">
-        <h1 className='text-4xl font-serif font-bold p-28'>Welcome to ours Page</h1>
+      <div className="md:w-[800px] sm:w-[500px] w-[358px]">
+        <h1 className='md:text-4xl sm:text-2xl text-xl font-serif font-bold p-28 w-full'>Welcome to ours Page</h1>
         <p className='my-5 font-serif'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime temporibus facilis cupiditate! Veritatis, dolorem? Itaque aliquid consequatur quam et soluta.</p>
         <Link to='/search'><Button gradientDuoTone='purpleToBlue' outline>View all Posts</Button></Link>
       </div>
