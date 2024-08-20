@@ -79,8 +79,8 @@ export default function CreatePost() {
           <TextInput onChange={(e) => setformData({ ...formData, title: e.target.value })} type='text' placeholder='Title' required id='title' className='flex-1'/>
           <Select onChange={(e)=>setformData({...formData,category:e.target.value})}>
             <option value="uncategorized">Select a category</option>
-            <option value="javaScript">JavaScript</option>
-            <option value="wordPress">WordPress</option>
+            <option value="javascript">JavaScript</option>
+            <option value="wordpress">WordPress</option>
             <option value="laravel">Laravel</option>
             <option value="spotify">Spotify</option>
           </Select>

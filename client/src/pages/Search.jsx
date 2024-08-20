@@ -5,7 +5,6 @@ import Card from '../components/Card';
 
 export default function Search() {
   const [posts, setposts] = useState([]);
-  console.log()
   const [loading, setloading] = useState(false);
   const [showMore, setshowMore] = useState(false);
   const location =useLocation()
@@ -119,8 +118,8 @@ const handleShowMore =async()=>{
           <label className='font-semibold'>Category:</label>
           <Select onChange={handleChange} value={searchBarData.category} id='category'>
             <option value='uncategorized'>Uncategorized</option>
-            <option value='javaScript'>JavaScript</option>
-            <option value='wordPress'>WordPress</option>
+            <option value='javascript'>JavaScript</option>
+            <option value='wordpress'>WordPress</option>
             <option value='laravel'>Laravel</option>
             <option value='spotify'>Spotify</option>
           </Select>
